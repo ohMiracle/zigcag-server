@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zigcag.rbac.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.zigcag.rbac.model.User">
+        <id column="id" property="id" />
+        <result column="account" property="account"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="role_name" property="roleName"/>
+        <result column="salt" property="salt"/>
+        <result column="password" property="password"/>
+        <result column="sex" property="sex"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="BaseQueryParams">
+        u.id,
+        u.account,
+        u.name,
+        u.phone,
+        u.email,
+        u.role_id,
+        u.salt,
+        u.password,
+        u.sex,
+        u.create_time,
+        u.update_time,
+        r.name roleName
+    </sql>
+
+<!--    <sql id="ThreeJointTables">-->
+<!--    SYS_USER LEFT JOIN SYS_ROLE ON SYS_USER.ROLE_ID=SYS_ROLE.ID-->
+<!--    LEFT JOIN SYS_USER SUPER_HIGHER ON SYS_USER.MGR=SUPER_HIGHER.ID-->
+<!--    </sql>-->
+    <sql id="From">
+        sys_user u left join sys_role r on u.role_id=r.id
+    </sql>
+    <select id="listUser" resultMap="BaseResultMap" parameterType="map" >
+        select
+            <include refid="BaseQueryParams"/>
+        from <include refid="From"/>
+        <where>
+            <if test="roleId != null">
+                u.role_id=#{roleId}
+            </if>
+        </where>
+    </select>
+
+
+<!--    <select id="selectUser" resultMap="BaseResultMap" >-->
+<!--        SELECT-->
+<!--            <include refid="BaseQueryParams"/>-->
+<!--        FROM <include refid="From"/>-->
+<!--        WHERE u.account = #{account} and u.password = #{password}-->
+<!--    </select>-->
+
+    <insert id="insertUser" parameterType="com.zigcag.rbac.model.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="account != null">
+                account,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{id},
+            <if test="account != null">
+                #{account},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="roleId != null">
+                #{roleId},
+            </if>
+            <if test="salt != null">
+                #{salt},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+
+
+<!--    <select id="selectUserByAccount" resultType="com.zigcag.rbac.model.User">-->
+<!--        SELECT <include refid="BaseQueryParams"/>,SYS_USER.PASSWORD ,SYS_USER.SALT FROM SYS_USER WHERE ACCOUNT = #{account}-->
+<!--    </select>-->
+<!--    <select id="selectUserById" resultType="com.zigcag.rbac.model.User">-->
+<!--        SELECT <include refid="BaseQueryParams"/>,SYS_USER.PASSWORD FROM SYS_USER WHERE ID = #{id}-->
+<!--    </select>-->
+<!--    <select id="getCountByAccount" resultType="int">-->
+<!--    SELECT COUNT(ID) FROM SYS_USER WHERE ACCOUNT = #{account}-->
+<!--    </select>-->
+
+
+
+<!--    <select id="listUser" parameterType="com.ecloude.controller.parambean.input.UserInputParamBean" resultMap="BaseResultMap">-->
+<!--    SELECT <include refid="BaseQueryParams"/>,SYS_ROLE.NAME ROLE_NAME,SUPER_HIGHER.ACCOUNT MGR_NAME FROM <include refid="ThreeJointTables"/>-->
+<!--    <where>-->
+<!--        <if test="account!=null and account!=''">-->
+<!--            AND SYS_USER.ACCOUNT like CONCAT('%',CONCAT(#{account},'%'))-->
+<!--        </if>-->
+<!--        <if test="nickname!=null and nickname!=''">-->
+<!--            AND SYS_USER.NICKNAME like CONCAT('%',CONCAT(#{nickname},'%'))-->
+<!--        </if>-->
+<!--        <if test="phone!=null and phone!=''">-->
+<!--            AND SYS_USER.PHONE =#{phone}-->
+<!--        </if>-->
+<!--        <if test="status!=null and status!=''">-->
+<!--            AND SYS_USER.STATUS=#{status}-->
+<!--        </if>-->
+<!--    </where>-->
+<!--    </select>-->
+
+    <update id="editUser" parameterType="com.zigcag.rbac.model.User" >
+        UPDATE sys_user
+        <set>
+            <if test="account != null">
+                account=#{account},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="phone != null">
+                phone=#{phone},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="roleId != null">
+                role_id=#{roleId},
+            </if>
+            <if test="salt != null">
+                salt=#{salt},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="createTime != null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time=#{updateTime},
+            </if>
+        </set>
+         where id=#{id}
+    </update>
+
+    <delete id="deleteUser" >
+        delete from sys_user where id=#{id}
+    </delete>
+
+    <delete id="getCountByAccount" >
+        select count(1) from sys_user where account=#{account}
+    </delete>
+</mapper>
