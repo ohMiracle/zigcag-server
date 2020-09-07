@@ -3,6 +3,7 @@ package com.zigcag.rbac.service.impl;
 import com.zigcag.rbac.dao.UserDao;
 import com.zigcag.rbac.exception.RbacException;
 import com.zigcag.rbac.model.User;
+import com.zigcag.rbac.model.UserQueryParam;
 import com.zigcag.rbac.service.UserService;
 import com.zigcag.rbac.utils.EncryptUtil;
 import org.apache.commons.lang3.RandomUtils;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		return uid;
 	}
 	@Override
-	public List<User> listUser(Map<String,Object> params) {
+	public List<User> listUser(UserQueryParam params) {
 		return userDao.listUser(params);
 	}
 
@@ -59,11 +60,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean deleteUser(Long id) {
 		return userDao.deleteUser(id) == 1;
-	}
-
-	@Override
-	public boolean checkAccountExist(String account) {
-		return userDao.getCountByAccount(account)> 0;
 	}
 
 

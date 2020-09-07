@@ -9,7 +9,5 @@ import lombok.Data;
  */
 @Data
 public class UserQueryParam extends BasePageBean {
-    private String name;
-    private String account;
     private String roleId;
 }
