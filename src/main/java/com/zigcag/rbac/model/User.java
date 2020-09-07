@@ -17,14 +17,15 @@ import java.util.Date;
 public class User{
 
     private final static Logger logger = LoggerFactory.getLogger(User.class);
-    private String id;
+    private Long uid;
     @NotBlank(message = "账户不能为空")
-    private String account;
-    @NotBlank(message = "姓名不能为空")
+    private String nickname;
     private String name;
+    private String avatar;
+    private String setQuestionNum;
+    private String answerQuestionNum;
     @Pattern(regexp = "\\d{11}",message = "手机号格式无效")
     private String phone;
-    @NotBlank(message = "邮箱地址不能为空")
     private String email;
     private String roleName;
     private String salt;

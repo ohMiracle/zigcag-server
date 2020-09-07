@@ -23,12 +23,6 @@
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" name="messageSource">
-    <!--<property name="basenames">
-                <list>
-                    <value>classpath:messages/messages</value>
-                    <value>classpath:messages/ValidationMessages</value>
-                </list>
-            </property>-->
         <property name="useCodeAsDefaultMessage" value="false" />
         <property name="defaultEncoding" value="UTF-8" />
         <property name="cacheSeconds" value="60" />
@@ -51,6 +45,13 @@
     <!--###############################SpringMVC配置-END###############################-->
 
 
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
 
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
 </beans>

@@ -10,7 +10,7 @@ import java.util.UUID;
  * @Date: 2020/9/6
  */
 @Data
-public class PageBean {
+public class BasePageBean {
     private int pageSize;
     private int current;
 }

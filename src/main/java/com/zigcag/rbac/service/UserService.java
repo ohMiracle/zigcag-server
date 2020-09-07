@@ -9,13 +9,13 @@ import java.util.Map;
 
 public interface UserService {
 
-	String addUser(User sysUser);
+	Long addUser(User sysUser);
 
     List<User> listUser(Map<String, Object> params);
 
 	boolean editUser(User sysUser);
 
-	boolean deleteUser(String id);
+	boolean deleteUser(Long id);
 
 	boolean checkAccountExist(String account);
 }

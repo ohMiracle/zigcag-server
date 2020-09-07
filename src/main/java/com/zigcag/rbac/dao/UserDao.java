@@ -14,7 +14,11 @@ public interface UserDao {
 
     int editUser(User sysUser);
 
-    int deleteUser(@Param("id") String id);
+    int deleteUser(@Param("uid") Long uid);
 
     int getCountByAccount(@Param("account") String account);
+
+    Long getUidByDbid(@Param("dbid") int dbid);
+
+    int deleteUid(@Param("uid") Long uid);
 }

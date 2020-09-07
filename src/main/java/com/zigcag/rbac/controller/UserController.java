@@ -3,14 +3,12 @@ package com.zigcag.rbac.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zigcag.rbac.model.Msg;
-import com.zigcag.rbac.model.PageBean;
+import com.zigcag.rbac.model.BasePageBean;
 import com.zigcag.rbac.model.User;
+import com.zigcag.rbac.model.UserQueryParam;
 import com.zigcag.rbac.service.UserService;
 import com.zigcag.rbac.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +28,8 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("/listUser")
-	public Msg listUser(@RequestBody PageBean pageBean) {
-		PageHelper.startPage(pageBean.getCurrent(),pageBean.getPageSize());
+	public Msg listUser(@RequestBody UserQueryParam userQueryParam) {
+		PageHelper.startPage(userQueryParam.getCurrent(), userQueryParam.getPageSize());
 		Map<String, Object> params = new HashMap<>();
 		List<User> UserList = userService.listUser(params);
 		PageInfo page = new PageInfo(UserList);
@@ -40,13 +38,12 @@ public class UserController {
 	@RequestMapping("/addUser")
 	public Msg addUser(@RequestBody @Valid User user){
 
-		boolean isAccountExist = userService.checkAccountExist(user.getAccount());
-		if(isAccountExist){
-			return Msg.error("用户已存在");
-		}
-		EncryptUtil.encryptPassword(user);
-		String id=userService.addUser(user);
-		return Msg.message(201,"成功新增用户").add("id",user.getId());
+		// boolean isAccountExist = userService.checkAccountExist(user.getAccount());
+		// if(isAccountExist){
+		// 	return Msg.error("用户已存在");
+		// }
+		long uid = userService.addUser(user);
+		return Msg.message(201,"成功新增用户").add("id",uid);
 	}
 
 	@RequestMapping("/editUser")
@@ -59,7 +56,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/deleteUser")
-	public Msg deleteUser( @RequestBody String id) throws Exception{
+	public Msg deleteUser( @RequestBody Long id) throws Exception{
 		if(id == null){
 			return Msg.error("用户ID为空");
 		}
