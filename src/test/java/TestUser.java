@@ -8,11 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.regex.Pattern;
+import java.util.*;
 
 /**
  * @Description:
@@ -32,5 +28,22 @@ public class TestUser {
         List<User> users = userService.listUser(params);
         Assert.assertNotNull(users.get(0));
         System.out.println(13);
+        Long a = 12131L;
+        String b = a.toString();
+        char[] chars = b.toCharArray();
+        boolean d = true;
+        int i = 1;
+        int in=0;
+        for (char aChar : chars) {
+            if(i>1){
+                if (in != aChar && in+1 != aChar ) {
+                    d = false;
+                    break;
+                }
+            }
+            in= aChar;
+            i++;
+        }
+        System.out.println(d);
     }
 }
