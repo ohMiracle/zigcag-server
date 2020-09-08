@@ -27,7 +27,10 @@ public class TestUser {
     public void testAdd() {
 
         User user = new User();
-        user.setNickname("miracle"+Thread.currentThread().getName());
+        user.setNickname("admin");
+        user.setPassword("123456");
+        user.setEmail("123@163.com");
+        user.setPhone("18811111111");
         String roleId = UUID.randomUUID().toString();
         user.setRoleId(roleId);
         Long aLong = userService.addUser(user);

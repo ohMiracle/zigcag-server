@@ -2,6 +2,7 @@ package com.zigcag.rbac.auth;
 
 import com.zigcag.rbac.model.Permission;
 import com.zigcag.rbac.model.User;
+import com.zigcag.rbac.service.OperationService;
 import com.zigcag.rbac.service.PermissionService;
 import com.zigcag.rbac.service.UserService;
 import org.apache.shiro.authc.*;
@@ -26,7 +27,7 @@ public class MyRealm extends AuthorizingRealm {
     @Resource
     UserService userService;
     @Resource
-    PermissionService permissionService;
+    OperationService operationService;
     @Override
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
         super.setCredentialsMatcher(credentialsMatcher);
@@ -34,26 +35,26 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //TODO principal可以是手机号或者邮箱
         User user = (User) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addRole(user.getRoleName());
-        //TODO 通过角色信息查询权限信息
-        Set<String> permissionList = permissionService.getPermissionListByRoleId(user.getRoleId());
-        simpleAuthorizationInfo.setStringPermissions(permissionList);
+        Set<String> operationSet = operationService.getOperationListByRoleId(user.getRoleId());
+        simpleAuthorizationInfo.setStringPermissions(operationSet);
         return simpleAuthorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String principal = (String) authenticationToken.getPrincipal();
-        //TODO 通过手机号或者邮箱查询该用户密码
         User user = userService.getPassword(principal);
         if (user == null) {
             throw new UnknownAccountException();
         }
-
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+        String password = user.getPassword();
+        String salt = user.getSalt();
+        user.setPassword(null);
+        user.setSalt(null);
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, password, ByteSource.Util.bytes(salt), getName());
         return authenticationInfo;
     }
 }

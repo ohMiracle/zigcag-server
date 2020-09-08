@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zigcag.rbac.dao.MenuDao">
+    <resultMap id="BaseResultMap" type="com.zigcag.rbac.model.Menu">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="BaseQueryParams">
+        m.dbid,m.id,m.parent_id,m.name,m.description,m.create_time,m.update_time
+    </sql>
+    <sql id="From">
+        sys_menu m
+        left join sys_permission_menu pm on m.id = pm.menu_id
+        left join sys_role_permission rp on rp.permission_id=pm.permission_id
+    </sql>
+    <select id="getMenuListByRoleId" resultMap="BaseResultMap" parameterType="string">
+        select <include refid="BaseQueryParams"/>
+        <include refid="From"/> where rp.role_id =#{roleId}
+    </select>
 
 </mapper>

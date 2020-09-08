@@ -11,12 +11,16 @@
         <result column="answer_question_num" property="answerQuestionNum"/>
         <result column="email" property="email"/>
         <result column="role_name" property="roleName"/>
+        <result column="role_id" property="roleId"/>
         <result column="salt" property="salt"/>
         <result column="password" property="password"/>
         <result column="sex" property="sex"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
+
+
+
 
     <sql id="BaseQueryParams">
         u.uid,
@@ -33,7 +37,8 @@
         u.sex,
         u.create_time,
         u.update_time,
-        r.name roleName
+        r.name role_name,
+        p.
     </sql>
 
 <!--    <sql id="ThreeJointTables">-->
@@ -62,7 +67,8 @@
     </select>
 
     <select id="getPassword" resultMap="BaseResultMap" parameterType="string">
-        select <include refid="BaseQueryParams"/>
+        select
+        <include refid="BaseQueryParams"/> ,
         from <include refid="From"/> where phone=#{account} or email=#{account}
     </select>
 <!--    <select id="selectUser" resultMap="BaseResultMap" >-->

@@ -6,10 +6,10 @@ create table if not exists sys_user
     nickname varchar(32)  not null,
     name varchar(64) null,
     avatar char(36) null,
-    set_question_num int(32),
-    answer_question_num int(32),
-    phone varchar(32) default null,
-    email varchar(32) null,
+    set_question_num int(32) default 0,
+    answer_question_num int(32) default 0,
+    phone varchar(32) unique key null,
+    email varchar(32) unique key null,
     role_id varchar(36) not null,
     salt varchar(36),
     password varchar(36),
@@ -90,8 +90,8 @@ create table sys_role_permission
 (
     dbid int(32) primary key auto_increment not null,
     id char(36)   unique key  not null,
-    sys_role_id char(36)  not null,
-    sys_permission_id char(36) not null
+    role_id char(36)  not null,
+    permission_id char(36) not null
 );
 drop table if exists sys_permission_menu;
 

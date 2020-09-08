@@ -3,6 +3,7 @@ package com.zigcag.rbac.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:
@@ -68,6 +69,15 @@ public class User{
     private Date updateTime;
     @NotBlank(message = "角色ID不能为空")
     private String roleId;
+    private List<Menu> menuList;
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
 
     public Boolean getRemember() {
         return remember;

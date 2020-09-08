@@ -9,6 +9,7 @@ import com.zigcag.rbac.utils.EncryptUtil;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
