@@ -1,9 +1,5 @@
 package com.zigcag.rbac.model;
 
-import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -13,28 +9,180 @@ import java.util.Date;
  * @Author: zhengchang
  * @Date: 2020/9/6
  */
-@Data
 public class User{
-
-    private final static Logger logger = LoggerFactory.getLogger(User.class);
+    /**
+     * 用户的唯一ID
+     */
     private Long uid;
+    /**
+     * 昵称，可重复
+     */
     @NotBlank(message = "账户不能为空")
     private String nickname;
+    /**
+     * 姓名
+     */
     private String name;
+    /**
+     * 头像
+     */
     private String avatar;
+    /**
+     * 设置题目数量
+     */
     private String setQuestionNum;
+    /**
+     * 答题数量
+     */
     private String answerQuestionNum;
+    /**
+     * 手机号
+     */
     @Pattern(regexp = "\\d{11}",message = "手机号格式无效")
     private String phone;
+    /**
+     * 邮箱地址
+     */
     private String email;
+    /**
+     * 角色名
+     */
     private String roleName;
+    /**
+     * 盐
+     */
     private String salt;
+    /**
+     * 密码
+     */
     @Pattern(regexp = "^(\\w){6,26}$",message ="密码应为6-26位英文字母")
     private String password;
+    /**
+     * 性别 1 男 2 女
+     */
     private Integer sex;
     private Date createTime;
     private Date updateTime;
     @NotBlank(message = "角色ID不能为空")
     private String roleId;
 
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getSetQuestionNum() {
+        return setQuestionNum;
+    }
+
+    public void setSetQuestionNum(String setQuestionNum) {
+        this.setQuestionNum = setQuestionNum;
+    }
+
+    public String getAnswerQuestionNum() {
+        return answerQuestionNum;
+    }
+
+    public void setAnswerQuestionNum(String answerQuestionNum) {
+        this.answerQuestionNum = answerQuestionNum;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
 }

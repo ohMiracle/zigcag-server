@@ -14,7 +14,7 @@ public interface UserService {
 
     List<User> listUser(UserQueryParam params);
 
-	boolean editUser(User sysUser);
+	boolean editUser(User user);
 
 	boolean deleteUser(Long id);
 

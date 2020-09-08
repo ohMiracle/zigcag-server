@@ -3,25 +3,19 @@ package com.zigcag.rbac.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zigcag.rbac.model.Msg;
-import com.zigcag.rbac.model.BasePageBean;
 import com.zigcag.rbac.model.User;
 import com.zigcag.rbac.model.UserQueryParam;
 import com.zigcag.rbac.service.UserService;
-import com.zigcag.rbac.utils.EncryptUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@Slf4j
 public class UserController {
 
 	@Resource

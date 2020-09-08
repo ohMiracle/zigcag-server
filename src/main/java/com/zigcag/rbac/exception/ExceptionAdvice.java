@@ -2,8 +2,9 @@ package com.zigcag.rbac.exception;
 
 
 import com.zigcag.rbac.model.Msg;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
@@ -18,9 +19,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  *
  */
 @RestControllerAdvice
-@Slf4j
 public class ExceptionAdvice {
-
+	private Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class);
 	/**
 	 * 信息无法读取
 	 * @param e
@@ -42,7 +42,7 @@ public class ExceptionAdvice {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Msg handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         ObjectError error = e.getBindingResult().getAllErrors().get(0);
-        log.info("数据验证异常：{}", error.getDefaultMessage());
+		logger.info("数据验证异常：{}", error.getDefaultMessage());
 		return Msg.message(400,error.getDefaultMessage());
 	}
 

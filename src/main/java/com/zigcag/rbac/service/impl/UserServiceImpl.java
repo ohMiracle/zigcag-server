@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean editUser(User sysUser) {
-		sysUser.setUpdateTime(new Date());
-		return userDao.editUser(sysUser) == 1;
+	public boolean editUser(User user) {
+		user.setUpdateTime(new Date());
+		return userDao.editUser(user) == 1;
 	}
 
 	@Override
