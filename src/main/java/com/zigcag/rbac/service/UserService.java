@@ -2,10 +2,9 @@ package com.zigcag.rbac.service;
 
 
 import com.zigcag.rbac.model.User;
-import com.zigcag.rbac.model.UserQueryParam;
+import com.zigcag.rbac.controller.bean.UserQueryParam;
 
 import java.util.List;
-import java.util.Map;
 
 
 public interface UserService {
@@ -18,4 +17,5 @@ public interface UserService {
 
 	boolean deleteUser(Long id);
 
+	User getPassword(String account);
 }

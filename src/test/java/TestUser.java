@@ -1,5 +1,5 @@
 import com.zigcag.rbac.model.User;
-import com.zigcag.rbac.model.UserQueryParam;
+import com.zigcag.rbac.controller.bean.UserQueryParam;
 import com.zigcag.rbac.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;

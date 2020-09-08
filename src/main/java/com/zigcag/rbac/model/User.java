@@ -10,6 +10,7 @@ import java.util.Date;
  * @Date: 2020/9/6
  */
 public class User{
+    //TODO 用户是存在shiro会话中的，需要确认是否要实现序列化接口
     /**
      * 用户的唯一ID
      */
@@ -17,7 +18,7 @@ public class User{
     /**
      * 昵称，可重复
      */
-    @NotBlank(message = "账户不能为空")
+    @NotBlank(message = "昵称不能为空")
     private String nickname;
     /**
      * 姓名
@@ -38,11 +39,12 @@ public class User{
     /**
      * 手机号
      */
-    @Pattern(regexp = "\\d{11}",message = "手机号格式无效")
+    @Pattern(regexp = "^1[3456789]\\d{9}$",message = "手机号格式无效")
     private String phone;
     /**
      * 邮箱地址
      */
+    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$",message = "邮箱格式无效")
     private String email;
     /**
      * 角色名
@@ -61,10 +63,19 @@ public class User{
      * 性别 1 男 2 女
      */
     private Integer sex;
+    private Boolean remember;
     private Date createTime;
     private Date updateTime;
     @NotBlank(message = "角色ID不能为空")
     private String roleId;
+
+    public Boolean getRemember() {
+        return remember;
+    }
+
+    public void setRemember(Boolean remember) {
+        this.remember = remember;
+    }
 
     public Long getUid() {
         return uid;

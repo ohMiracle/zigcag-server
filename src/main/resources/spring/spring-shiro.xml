@@ -16,9 +16,9 @@
         <!--shiro最核心组件，具体后面说-->
         <property name="securityManager" ref="securityManager"/>
         <!--设置没有登录时的跳转地址-->
-        <property name="loginUrl" value="/static/html/login.html"/>
+        <property name="loginUrl" value="/login"/>
         <!--设置权限不足时的跳转地址-->
-        <property name="unauthorizedUrl" value="/static/html/noPerm.html"/>
+        <property name="unauthorizedUrl" value="/unauthorized"/>
         <!--对哪个后端接口使用哪个过滤器进行配置，等号后边是shiro内置过滤器的名字-->
         <property name="filterChainDefinitions">
             <value>
@@ -50,6 +50,7 @@
     <bean id="hashedCredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
+        <property name="storedCredentialsHexEncoded" value="true"></property>
     </bean>
 
     <bean id="myRealm" class="com.zigcag.rbac.auth.MyRealm">

@@ -50,7 +50,7 @@
     <sql id="From">
         sys_user u left join sys_role r on u.role_id=r.id
     </sql>
-    <select id="listUser" resultMap="BaseResultMap" parameterType="com.zigcag.rbac.model.UserQueryParam" >
+    <select id="listUser" resultMap="BaseResultMap" parameterType="com.zigcag.rbac.controller.bean.UserQueryParam" >
         select
             <include refid="BaseQueryParams"/>
         from <include refid="From"/>
@@ -61,7 +61,10 @@
         </where>
     </select>
 
-
+    <select id="getPassword" resultMap="BaseResultMap" parameterType="string">
+        select <include refid="BaseQueryParams"/>
+        from <include refid="From"/> where phone=#{account} or email=#{account}
+    </select>
 <!--    <select id="selectUser" resultMap="BaseResultMap" >-->
 <!--        SELECT-->
 <!--            <include refid="BaseQueryParams"/>-->

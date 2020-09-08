@@ -37,7 +37,7 @@
         <!-- 指定上传的文件的最大大小 -->
         <property name="maxUploadSize" value="1024000000"></property>
     </bean>
-    <context:component-scan base-package="com.zigcag.rbac.controller" use-default-filters="false">
+    <context:component-scan base-package="com.zigcag.rbac.controller,com.zigcag.rbac.exception" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <!--控制器增强，通常用来解决全局异常-->
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>

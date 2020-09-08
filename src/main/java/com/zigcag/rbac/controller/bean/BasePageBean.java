@@ -1,4 +1,4 @@
-package com.zigcag.rbac.model;
+package com.zigcag.rbac.controller.bean;
 
 /**
  * @Description:

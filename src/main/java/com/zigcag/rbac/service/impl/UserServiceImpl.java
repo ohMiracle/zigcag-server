@@ -3,7 +3,7 @@ package com.zigcag.rbac.service.impl;
 import com.zigcag.rbac.dao.UserDao;
 import com.zigcag.rbac.exception.RbacException;
 import com.zigcag.rbac.model.User;
-import com.zigcag.rbac.model.UserQueryParam;
+import com.zigcag.rbac.controller.bean.UserQueryParam;
 import com.zigcag.rbac.service.UserService;
 import com.zigcag.rbac.utils.EncryptUtil;
 import org.apache.commons.lang3.RandomUtils;
@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
 	public boolean editUser(User user) {
 		user.setUpdateTime(new Date());
 		return userDao.editUser(user) == 1;
+	}
+
+	@Override
+	public User getPassword(String account) {
+		return userDao.getPassword(account);
 	}
 
 	@Override

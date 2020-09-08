@@ -1,11 +1,10 @@
 package com.zigcag.rbac.dao;
 
 import com.zigcag.rbac.model.User;
-import com.zigcag.rbac.model.UserQueryParam;
+import com.zigcag.rbac.controller.bean.UserQueryParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserDao {
 
@@ -22,4 +21,6 @@ public interface UserDao {
     Long getUidByDbid(@Param("dbid") int dbid);
 
     int deleteUid(@Param("uid") Long uid);
+
+    User getPassword(@Param("account")String account);
 }

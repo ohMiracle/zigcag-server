@@ -1,7 +1,7 @@
-package com.zigcag.rbac.model;
+package com.zigcag.rbac.controller.bean;
 
 /**
- * @Description:
+ * @Description: 用户查询参数，角色展示时会使用
  * @Author: zhengchang
  * @Date: 2020/9/6
  */
